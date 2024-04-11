@@ -1,2 +1,7 @@
 # IDEs
 .vscode
+.vs
+
+# Build
+bin/
+obj/
