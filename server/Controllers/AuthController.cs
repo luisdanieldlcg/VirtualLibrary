@@ -12,11 +12,13 @@ namespace server.Controllers
 
         private readonly ILogger<AuthController> _logger;
         private readonly DbInstance _db;
+        private readonly IConfiguration _config;
 
-        public AuthController(ILogger<AuthController> logger, DbInstance db)
+        public AuthController(ILogger<AuthController> logger, DbInstance db, IConfiguration config)
         {
             _logger = logger;
             _db = db;
+            _config = config;
         }
 
         [HttpPost("login")]
@@ -43,20 +45,13 @@ namespace server.Controllers
 
             var hash = BCrypt.Net.BCrypt.EnhancedHashPassword(dto.Password, BCrypt.Net.HashType.SHA512, 12);
 
-            var avatarUrl = "images/defaultAvatar.jpg";
+            var avatarUrl = Constants.DefaultAvatarPath;
 
             if (dto.AvatarImage != null)
             {
-                // create a folder for this user with the name of this user
-                var folder = Path.Combine(Constants.ImagesDirectory, dto.Username);
-                if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-                var fileName = "avatar" + Path.GetExtension(dto.AvatarImage.FileName);
-                var filePath = Path.Combine(folder, fileName);
-                using var stream = new FileStream(filePath, FileMode.Create);
-                await dto.AvatarImage.CopyToAsync(stream);
-                avatarUrl = $"images/{dto.Username}/{fileName}";
+                avatarUrl = await ImageUpload.UploadAvatar(dto.Username, dto.AvatarImage);
+                if (avatarUrl == null) return JSend.Error("No se pudo subir la imagen. Inténtalo de nuevo.");
             }
-
             var result = _db.Users.Add(new UserModel
             {
                 FullName = dto.FullName,
@@ -69,8 +64,7 @@ namespace server.Controllers
 
             var saved = await _db.SaveChangesAsync() > 0;
             if (!saved) return JSend.Error("No se pudo completar el registro. Inténtalo de nuevo.");
-            // TODO: get port from configuration
-            result.Entity.AvatarImageUrl = "http://localhost:5251/" + result.Entity.AvatarImageUrl;
+            result.Entity.AvatarImageUrl = Constants.GetServerUrl(HttpContext, result.Entity.AvatarImageUrl);
             _logger.LogInformation("User registered successfully");
             return JSend.Success(result.Entity);
         }

@@ -2,7 +2,14 @@
 
 namespace server.Dtos
 {
-    public record LoginDTO(string EmailOrUsername, string Password);
+    public class LoginDTO
+    {
+        [Required(ErrorMessage = "El correo electrónico o nombre de usuario es requerido")]
+        public string EmailOrUsername { get; set; }
+
+        [Required(ErrorMessage = "La contraseña es requerida")]
+        public string Password { get; set; }
+    }
 
     public class SignUpDTO
     {
@@ -19,7 +26,6 @@ namespace server.Dtos
         [Required]
         [Compare(nameof(Password), ErrorMessage = "Las contraseñas no coinciden")]
         public string ConfirmPassword { get; set; }
-
-        public IFormFile AvatarImage { get; set; }
+        public IFormFile? AvatarImage { get; set; }
     }
 }
