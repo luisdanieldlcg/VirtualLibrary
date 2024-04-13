@@ -13,5 +13,6 @@ namespace server
 
         public DbSet<UserModel> Users { get; set; }
         public DbSet<BookModel> Books { get; set; }
+        public DbSet<BookGenreModel> BookGenres { get; set; }
     }
 }

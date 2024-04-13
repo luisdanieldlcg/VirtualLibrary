@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
 {
-    [Table("Category")]
+    [Table("category")]
     public class CategoryModel
     {
         [Key]
-        public string IdCategory { get; set; }
+        public int IdCategory { get; set; }
         public string CategoryName { get; set; }
     }
 }

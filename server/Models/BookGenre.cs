@@ -3,11 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
 {
-    [Table("BookGenre")]
+    [Table("bookgenre")]
     public class BookGenreModel
     {
         [Key]
         public int IdBook { get; set; }
-        public int IdGenre { get; set; }
+
+        [ForeignKey("IdGenre")]
+        public GenreModel Genre { get; set; }
     }
 }

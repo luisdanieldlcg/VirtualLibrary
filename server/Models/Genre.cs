@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
 {
-    [Table("Genre")]
+    [Table("genre")]
     public class GenreModel
     {
         [Key]
