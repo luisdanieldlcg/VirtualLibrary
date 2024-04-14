@@ -1,12 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-
-interface User {
-  idUser: string;
-  fullName: string;
-  userName: string;
-  email: string;
-  avatarUrl: string;
-}
+import { User } from "../api";
 
 interface AuthContext {
   user: User | null;
@@ -22,7 +15,6 @@ interface Props {
 }
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
-
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}

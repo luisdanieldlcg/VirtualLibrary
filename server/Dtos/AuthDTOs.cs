@@ -20,10 +20,10 @@ namespace server.Dtos
         [Required(ErrorMessage = "El correo electrónico es requerido")]
         [EmailAddress(ErrorMessage = "El correo electrónico no es válido")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "La contraseña es requerida")]
         [MinLength(6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres")]
         public string Password { get; set; }
-        [Required]
+        [Required(ErrorMessage = "La confirmación de la contraseña es requerida")]
         [Compare(nameof(Password), ErrorMessage = "Las contraseñas no coinciden")]
         public string ConfirmPassword { get; set; }
         public IFormFile? AvatarImage { get; set; }

@@ -69,5 +69,15 @@ namespace server.Controllers
             _logger.LogInformation("User registered successfully");
             return JSend.Success(result.Entity);
         }
+
+        [HttpGet("verify")]
+        public async Task<ActionResult> Verify()
+        {
+            var payload = JwtHelper.VerifyCookie(HttpContext, _config.GetSection("Jwt:Secret").Value!);
+            if (payload == null) return JSend.Error("No autorizado");
+            var user = await _db.Users.FindAsync(payload.Id);
+            if (user == null) return JSend.Error("No autorizado");
+            return JSend.Success(user);
+        }
     }
 }

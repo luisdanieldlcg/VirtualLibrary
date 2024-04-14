@@ -27,7 +27,7 @@ const AvatarPicker = ({ initialImage, onFileChanged }: Props) => {
       border="2px solid"
       borderColor="#a79277"
     >
-      <Avatar name="User Avatar" src={image} w={320} h={320} bg="#d1bb9e" />
+      <Avatar src={image} w={320} h={320} bg="#d1bb9e" />
       <IconButton
         borderRadius={20}
         border="3px solid"

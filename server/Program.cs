@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using server;
 
@@ -13,8 +14,24 @@ var databaseSettings = builder.Configuration.GetConnectionString("Dev")
 ?? throw new Exception("Database connection string not found");
 
 builder.Services.AddDbContext<DbInstance>(options => options.UseMySQL(databaseSettings));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddCookie(cookieOpts => cookieOpts.Cookie.Name = "authToken")
+.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+{
+    options.TokenValidationParameters = JwtHelper.GetValidationParameters(builder.Configuration["Jwt:Secret"]!);
+    options.SaveToken = true;
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            context.Token = context.Request.Cookies["authToken"];
+            return Task.CompletedTask;
+        }
+    };
+});
 
-builder.Services.AddCors((options) =>
+builder.Services
+.AddCors((options) =>
 {
     options.AddPolicy("cors", corsbuilder =>
     {
