@@ -14,6 +14,17 @@ var databaseSettings = builder.Configuration.GetConnectionString("Dev")
 
 builder.Services.AddDbContext<DbInstance>(options => options.UseMySQL(databaseSettings));
 
+builder.Services.AddCors((options) =>
+{
+    options.AddPolicy("cors", corsbuilder =>
+    {
+        corsbuilder
+        .SetIsOriginAllowed((host) => true)
+        .AllowAnyHeader()
+        .AllowCredentials()
+        .AllowAnyMethod();
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,5 +36,5 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.UseStaticFiles();
 app.MapControllers();
-
+app.UseCors("cors");
 app.Run();

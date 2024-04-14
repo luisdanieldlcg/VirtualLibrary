@@ -49,6 +49,7 @@ namespace server.Controllers
 
             if (dto.AvatarImage != null)
             {
+                _logger.LogInformation("Uploading avatar image");
                 avatarUrl = await ImageUpload.UploadAvatar(dto.Username, dto.AvatarImage);
                 if (avatarUrl == null) return JSend.Error("No se pudo subir la imagen. Inténtalo de nuevo.");
             }

@@ -5,3 +5,4 @@
 # Build
 bin/
 obj/
+node_modules/
