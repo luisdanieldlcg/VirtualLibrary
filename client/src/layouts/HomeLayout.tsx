@@ -9,8 +9,6 @@ const HomeLayout = () => {
       <Box transition="0.25s">
         <Navbar />
         <Outlet />
-        <Box h="100px" mt={32} />
-
         <Footer />
       </Box>
     </>

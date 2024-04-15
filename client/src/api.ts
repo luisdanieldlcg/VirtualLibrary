@@ -32,8 +32,7 @@ export interface Book {
   authorName: string;
   publicationYear: Date;
   linkPDF: string;
-  category: string;
-  genreName: string;
+  categoryName: string;
   genres: string[];
   coverUrl: string;
 }

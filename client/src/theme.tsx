@@ -1,4 +1,4 @@
-import { Input, extendTheme } from "@chakra-ui/react";
+import { Input, Skeleton, extendTheme } from "@chakra-ui/react";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
@@ -6,6 +6,16 @@ import "@fontsource/poppins/700.css";
 const backgroundColor = "#FFF2E1";
 const inputColor = "#EAD8C0";
 const inputFocusColor = "#d9c7ae";
+
+// These are the default breakpoints
+const breakpoints = {
+  base: "0em", // 0px
+  sm: "30em", // ~480px. em is a relative unit and is dependant on the font-size.
+  md: "48em", // ~768px
+  lg: "62em", // ~992px
+  xl: "80em", // ~1280px
+  "2xl": "96em", // ~1536px
+};
 
 export default extendTheme({
   fonts: {
@@ -16,6 +26,7 @@ export default extendTheme({
     surface: "#d1bb9e",
     surfaceDarker: "#a79277",
   },
+  breakpoints,
   components: {
     Button: {
       variants: {
