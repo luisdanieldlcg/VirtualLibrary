@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import { Input, extendTheme } from "@chakra-ui/react";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
@@ -14,12 +14,13 @@ export default extendTheme({
   },
   colors: {
     surface: "#d1bb9e",
+    surfaceDarker: "#a79277",
   },
   components: {
     Button: {
       variants: {
         primary: {
-          bg: "#d1bb9e",
+          bg: "surfaceDarker",
           color: "gray.800",
           _hover: { bg: "#a79277" },
           fontSize: "lg",

@@ -16,12 +16,14 @@ namespace server
 
     public class JwtHelper
     {
-        public static void MakeCookie(HttpContext ctx, string secret, DateTime expiresIn, UserModel user)
+        public static void MakeCookie(HttpContext ctx, string secret, int minutesAlive, UserModel user)
         {
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var handler = new JwtSecurityTokenHandler();
+            var date = DateTime.UtcNow.AddMinutes(minutesAlive);
+
 
             var token = handler.CreateToken(new SecurityTokenDescriptor
             {
@@ -31,7 +33,7 @@ namespace server
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.NameIdentifier, user.IdUser.ToString())
                 }),
-                Expires = expiresIn,
+                Expires = date,
                 SigningCredentials = creds,
                 NotBefore = DateTime.UtcNow,
             });
@@ -41,7 +43,7 @@ namespace server
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.None,
-                Expires = expiresIn
+                Expires = date
             });
         }
 

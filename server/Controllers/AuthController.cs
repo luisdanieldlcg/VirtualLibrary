@@ -67,6 +67,9 @@ namespace server.Controllers
             if (!saved) return JSend.Error("No se pudo completar el registro. Inténtalo de nuevo.");
             result.Entity.AvatarImageUrl = Constants.GetServerUrl(HttpContext, result.Entity.AvatarImageUrl);
             _logger.LogInformation("User registered successfully");
+
+            var minutesAlive = int.Parse(_config.GetSection("Jwt:MinutesAlive").Value!);
+            JwtHelper.MakeCookie(HttpContext, _config.GetSection("Jwt:Secret").Value!, minutesAlive, result.Entity);
             return JSend.Success(result.Entity);
         }
 
