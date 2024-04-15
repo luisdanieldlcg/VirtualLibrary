@@ -30,6 +30,7 @@ namespace server.Controllers
                 book.AuthorName,
                 book.PublicationYear,
                 book.LinkPDF,
+                book.LinkCover,
                 book.Category.CategoryName,
                 genres = _db.BookGenres
                         .Where(bg => bg.IdBook == book.IdBook)

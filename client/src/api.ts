@@ -25,6 +25,19 @@ export interface User {
   avatarUrl: string;
 }
 
+export interface Book {
+  idBook: string;
+  title: string;
+  synopsis: string;
+  authorName: string;
+  publicationYear: Date;
+  linkPDF: string;
+  category: string;
+  genreName: string;
+  genres: string[];
+  coverUrl: string;
+}
+
 export const signup = async (
   dto: SignupDTO,
   onSuccess: (user: User) => void,
@@ -51,4 +64,17 @@ export const signup = async (
   } catch (error) {
     onFail("Error de conexión, inténtelo de nuevo o contacte al soporte");
   }
+};
+
+export const getAllBooks = async () => {
+  try {
+    let response = await api.get("/books");
+    if (response.data.status === "success") {
+      let books: Book[] = response.data.data;
+      return books;
+    }
+  } catch (error) {
+    console.error("Error fetching books", error);
+  }
+  return [];
 };

@@ -14,6 +14,7 @@ namespace server.Models
         public DateTime PublicationYear { get; set; }
         public string LinkPDF { get; set; }
 
+        public string LinkCover { get; set; }
         [ForeignKey("IdCategory")]
         public CategoryModel Category { get; set; }
     }

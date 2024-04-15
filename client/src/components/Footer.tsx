@@ -1,24 +1,22 @@
-import { Flex } from '@chakra-ui/react'
-
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
-    <Flex
-        as="footer"
-        align="center"
-        justify="center"
-        bg="surface"
-        color="onSurface"
-        p={4}
-        position="fixed"
-        bottom="0"
-        width="100%"
-        mt={4}
+    <div>
+      <footer>
+        <Box
+          bg="primary"
+          color="white"
+          p={4}
+          position="absolute"
+          bottom="0"
+          width="100%"
         >
-        © 2024 Cyberbook
-    </Flex>
-    
-  )
-}
+          <Text>© 2024 Cyberbook</Text>
+        </Box>
+      </footer>
+    </div>
+  );
+};
 
-export default Footer
+export default Footer;
