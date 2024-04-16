@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Book, getAllBooks } from "../api";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 type SearchFilter = "title" | "genre" | "category" | "reading-list";
 
@@ -30,6 +31,7 @@ const HomePage = () => {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<SearchFilter>("title");
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigate();
 
   // Fetch all books from the API and populate the `books` state
 
@@ -83,6 +85,9 @@ const HomePage = () => {
             boxShadow="0 0 20px 0 hsla(0, 0%, 0%, 0.3)"
           >
             <Card
+              onClick={() => {
+                navigation("/home/book/" + book.idBook, { state: { book } });
+              }}
               key={i}
               bg="surface"
               w="240px"
@@ -212,8 +217,9 @@ const HomePage = () => {
                 // create a skeleton for each book card
                 // that resembles the size of the book card and its decorations
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, i) => (
-                  <Box borderRadius="10px">
+                  <Box borderRadius="10px" key={i}>
                     <Skeleton
+                      key={i}
                       startColor="surface"
                       endColor="surfaceDarker"
                       borderRadius="10px"

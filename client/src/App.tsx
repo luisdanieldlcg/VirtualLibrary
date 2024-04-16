@@ -11,6 +11,7 @@ import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
 import { AuthProvider } from "./hooks/useAuth";
 import HomeLayout from "./layouts/HomeLayout";
+import BookPage from "./pages/BookPage";
 
 function App() {
   return (
@@ -28,9 +29,12 @@ const router = createBrowserRouter(
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      {/* <Route path="/home" element={<RequireAuth child={<HomePage />} />} /> */}
       <Route element={<HomeLayout />}>
         <Route path="/home" element={<HomePage />} />
+        <Route path="/home/book/:id" element={<BookPage />} />{" "}
+        {
+          // add book/:id route here
+        }
       </Route>
       <Route path="*" element={<Navigate to="/login" />} />
     </Route>
