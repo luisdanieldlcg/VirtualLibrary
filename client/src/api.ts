@@ -30,7 +30,7 @@ export interface Book {
   title: string;
   synopsis: string;
   authorName: string;
-  publicationYear: Date;
+  publicationYear: number;
   linkPDF: string;
   categoryName: string;
   genres: string[];

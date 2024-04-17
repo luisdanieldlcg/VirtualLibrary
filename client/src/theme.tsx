@@ -1,4 +1,4 @@
-import { Input, Skeleton, extendTheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
@@ -25,9 +25,36 @@ export default extendTheme({
   colors: {
     surface: "#d1bb9e",
     surfaceDarker: "#a79277",
+    surfaceLighter: "#c9b397",
+    background: backgroundColor,
   },
   breakpoints,
   components: {
+    Tabs: {
+      variants: {
+        primary: {
+          tab: {
+            borderRadius: "20px",
+            _selected: {
+              color: "gray.800",
+              bg: "surfaceDarker",
+            },
+          },
+        },
+      },
+    },
+    Progress: {
+      variants: {
+        primary: {
+          filledTrack: {
+            bg: "surfaceDarker",
+          },
+          track: {
+            bg: "surface",
+          },
+        },
+      },
+    },
     Button: {
       variants: {
         primary: {

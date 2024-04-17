@@ -17,6 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { CYBERBOOK_SERVER_BASE_URL, signup } from "../api";
+import TitleContainer from "../components/TextContainer";
 
 const SignupPage = () => {
   const [input, setInput] = useState({
@@ -85,15 +86,7 @@ const SignupPage = () => {
               lg: "560px",
             }}
           >
-            <Heading
-              bg="surface"
-              borderRadius={20}
-              px={7}
-              py={3}
-              display="inline-block"
-            >
-              Crea tu cuenta
-            </Heading>
+            <TitleContainer text="Crea tu cuenta" />
             <FormLabel mt={16}> Nombre completo </FormLabel>
             <Input
               placeholder="Ingrese su nombre completo"

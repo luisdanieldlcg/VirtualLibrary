@@ -1,10 +1,6 @@
 import {
   Box,
-  Card,
-  CardBody,
-  CardHeader,
   Container,
-  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -13,47 +9,24 @@ import {
   SimpleGrid,
   Skeleton,
   SkeletonText,
-  Tag,
   Text,
-  Tooltip,
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Book, getAllBooks } from "../api";
+import { getAllBooks } from "../api";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useBooks } from "../hooks/useBooks";
+import BookCard from "../components/BookCard";
 
 type SearchFilter = "title" | "genre" | "category" | "reading-list";
 
 const HomePage = () => {
-  const [books, setBooks] = useState<Book[]>([]);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<SearchFilter>("title");
-  const [loading, setLoading] = useState(true);
   const navigation = useNavigate();
-
-  // Fetch all books from the API and populate the `books` state
-
-  useEffect(() => {
-    const fetchBooks = async () => {
-      setTimeout(async () => {
-        const availableBooks = await getAllBooks();
-        setBooks(availableBooks || []);
-
-        setLoading(false);
-      }, 1500);
-    };
-    fetchBooks();
-  }, []);
-
-  // get a list of all unique gnres
-  // const genres = books
-  //   .map((book) => book.genres)
-  //   .flat()
-  //   .filter((genre, i, arr) => arr.indexOf(genre) === i);
-
-  // console.log(genres);
+  const { books, isLoading } = useBooks();
 
   const search = books.filter((book) => {
     switch (filter) {
@@ -72,55 +45,15 @@ const HomePage = () => {
 
   const bookCards = search.map((book, i) => {
     return (
-      <ScaleFade in={true} initialScale={0.1}>
+      <ScaleFade in={true} initialScale={0.1} key={i}>
         <motion.div whileHover={{ scale: 1.08 }}>
-          <Tooltip
-            // tooltip to put genres
-            label={book.genres.join(", ")}
-            fontSize="md"
-            bg="surfaceDarker"
-            color="white"
-            placement="top"
-            hasArrow
-            boxShadow="0 0 20px 0 hsla(0, 0%, 0%, 0.3)"
-          >
-            <Card
-              onClick={() => {
-                navigation("/home/book/" + book.idBook, { state: { book } });
-              }}
-              key={i}
-              bg="surface"
-              w="240px"
-              transition="transform 0.2s"
-              cursor="pointer"
-              boxShadow="0 12px 30px 0px hsla(0, 0%, 0%, 0.3)"
-              bgGradient="linear(to-b, surface, surfaceDarker)"
-            >
-              <CardHeader textAlign="center" fontWeight="bold">
-                <Text fontSize="lg" fontWeight="600">
-                  {book.title}
-                </Text>
-                <Tag
-                  size="sm"
-                  variant="solid"
-                  bg="surfaceDarker"
-                  borderRadius="full"
-                  mt={2}
-                >
-                  {book.categoryName}
-                </Tag>
-              </CardHeader>
-              <CardBody pb={5} pt={0}>
-                <Image
-                  borderRadius="xl"
-                  src="https://marketplace.canva.com/EAFaQMYuZbo/1/0/1003w/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg"
-                  objectFit="fill"
-                  w="100%"
-                  h="210px"
-                />
-              </CardBody>
-            </Card>
-          </Tooltip>
+          <BookCard
+            book={book}
+            compact
+            onClick={() =>
+              navigation("/home/book/" + book.idBook, { state: { book } })
+            }
+          />
         </motion.div>
       </ScaleFade>
     );
@@ -187,7 +120,7 @@ const HomePage = () => {
           py={12}
           mt={40}
           minH="100vh"
-          bg="surface"
+          bg="surfaceLighter"
         >
           {bookCards.length > 0 ? (
             <SimpleGrid
@@ -202,7 +135,7 @@ const HomePage = () => {
             >
               {bookCards}
             </SimpleGrid>
-          ) : loading ? (
+          ) : isLoading ? (
             <SimpleGrid
               columns={{
                 base: 1,

@@ -1,95 +1,69 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  Flex,
-  Heading,
-  Image,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, VStack } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import { Book } from "../api";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { TextContainer } from "../components/TextContainer";
+import BookCard from "../components/BookCard";
 
 const BookPage = () => {
   const location = useLocation();
   const { book } = location.state as { book: Book };
   return (
-    <VStack align="flex-start">
+    <VStack align="flex-start" minH="90vh">
       <IoArrowBackCircleOutline
-        onClick={() => {
-          window.history.back();
-        }}
+        style={{ margin: 16 }}
+        onClick={() => window.history.back()}
         cursor="pointer"
-        color="gray.500"
         size="44px"
-        style={{
-          margin: 14,
-        }}
       />
-      <Flex>
-        <Card
-          bg="surface"
-          w="400px"
-          h="590px"
-          borderRadius="xl"
-          transition="transform 0.2s"
-          cursor="pointer"
-          boxShadow="0 12px 30px 0px hsla(0, 0%, 0%, 0.3)"
-          bgGradient="linear(to-b, surface, surfaceDarker)"
-          mx="64px"
-          mb={4}
-        >
-          <CardBody>
-            <Image
-              mt={1}
-              borderRadius="xl"
-              src="https://marketplace.canva.com/EAFaQMYuZbo/1/0/1003w/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg"
-              objectFit="fill"
-              w="100%"
-              h="540px"
-            />
-          </CardBody>
-        </Card>
+      <Flex wrap="wrap">
+        <Box ml="64px">
+          <BookCard book={book} />
+        </Box>
 
-        <VStack h="100%">
-          <Heading
-            bg="surface"
-            borderRadius={20}
-            px={7}
-            py={3}
-            display="inline-block"
-            h="100%"
-          >
+        <VStack h="100%" align="flex-start" spacing={2} ml="5rem" mt={10}>
+          <TextContainer>
+            <strong>Título: </strong>
             {book.title}
-          </Heading>
+          </TextContainer>
 
-          <Heading
-            bg="surface"
-            borderRadius={20}
-            px={7}
-            py={3}
-            display="inline-block"
-            h="100%"
-          >
+          <TextContainer>
+            <strong>Autor: </strong>
             {book.authorName}
-          </Heading>
+          </TextContainer>
 
-          <Box
-            bg="surface"
-            borderRadius={20}
-            px={7}
-            py={3}
-            display="inline-block"
-            h="100%"
-          >
-            {
-              // TODO: figure out why this is not working
-            }
-            {/* {book.synopsis} */}
-          </Box>
+          <TextContainer>
+            <strong>Año de publicación: </strong>
+            {book.publicationYear}
+          </TextContainer>
+
+          <TextContainer>
+            <strong>Categoría: </strong>
+            {book.categoryName}
+          </TextContainer>
+
+          <TextContainer>
+            <strong>Género(s):</strong>
+            {book.genres.join(", ")}
+          </TextContainer>
+
+          <TextContainer>
+            <strong>Sinopsis: </strong>
+            {book.synopsis}
+          </TextContainer>
         </VStack>
       </Flex>
+      <Box
+        w="100%"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        ml="65vh"
+      >
+        <Button variant="primary" size="lg" mt={3}>
+          Añadir a la biblioteca
+        </Button>
+      </Box>
     </VStack>
   );
 };

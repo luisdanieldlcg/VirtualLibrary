@@ -26,9 +26,9 @@ namespace server.Controllers
             {
                 book.IdBook,
                 book.Title,
-                book.Sypnosis,
+                book.Synopsis,
                 book.AuthorName,
-                book.PublicationYear,
+                PublicationYear = book.PublicationYear.Year,
                 book.LinkPDF,
                 book.LinkCover,
                 book.Category.CategoryName,

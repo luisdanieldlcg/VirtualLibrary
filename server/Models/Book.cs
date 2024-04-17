@@ -9,7 +9,7 @@ namespace server.Models
         [Key]
         public int IdBook { get; set; }
         public string Title { get; set; }
-        public string Sypnosis { get; set; }
+        public string Synopsis { get; set; }
         public string AuthorName { get; set; }
         public DateTime PublicationYear { get; set; }
         public string LinkPDF { get; set; }

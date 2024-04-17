@@ -12,12 +12,17 @@ import HomePage from "./pages/HomePage";
 import { AuthProvider } from "./hooks/useAuth";
 import HomeLayout from "./layouts/HomeLayout";
 import BookPage from "./pages/BookPage";
+import { BooksProvider } from "./hooks/useBooks";
+import ProfilePage from "./pages/ProfilePage";
+import { useEffect } from "react";
 
 function App() {
   return (
     <>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <BooksProvider>
+          <RouterProvider router={router} />
+        </BooksProvider>
       </AuthProvider>
     </>
   );
@@ -31,10 +36,8 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignupPage />} />
       <Route element={<HomeLayout />}>
         <Route path="/home" element={<HomePage />} />
-        <Route path="/home/book/:id" element={<BookPage />} />{" "}
-        {
-          // add book/:id route here
-        }
+        <Route path="/home/book/:id" element={<BookPage />} />
+        <Route path="/home/profile" element={<ProfilePage />} />
       </Route>
       <Route path="*" element={<Navigate to="/login" />} />
     </Route>

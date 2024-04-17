@@ -1,6 +1,9 @@
-import { Avatar, Box, Button, Flex, Image, Spacer } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Spacer } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { useBooks } from "../hooks/useBooks";
 
 const Navbar = () => {
+  const { books } = useBooks();
   return (
     <Box position="sticky" zIndex="100">
       <Flex
@@ -12,11 +15,6 @@ const Navbar = () => {
         alignItems="center"
       >
         <Flex alignItems="center" justifyContent="center" ml="auto" mr="auto">
-          {/* <Avatar
-            name="Dan Abrahmov"
-            src="https://bit.ly/dan-abramov"
-            size="lg"
-          /> */}
           <Image
             src="/assets/images/logo-cyberbook.png"
             alt="Segun Adebayo"
@@ -26,12 +24,16 @@ const Navbar = () => {
         </Flex>
 
         <Spacer />
-        <Button colorScheme="teal" variant="primary" mr={6}>
-          INICIO
-        </Button>
-        <Button colorScheme="teal" variant="primary" mr={6}>
-          PERFIL
-        </Button>
+        <Link to="/home">
+          <Button colorScheme="teal" variant="primary" mr={6}>
+            INICIO
+          </Button>
+        </Link>
+        <Link to="/home/profile" state={{ books }}>
+          <Button colorScheme="teal" variant="primary" mr={6}>
+            PERFIL
+          </Button>
+        </Link>
       </Flex>
     </Box>
   );
