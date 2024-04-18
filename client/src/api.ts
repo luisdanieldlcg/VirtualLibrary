@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const CYBERBOOK_SERVER_BASE_URL = "http://localhost:5251";
 export const CYBERBOOK_API_URL = CYBERBOOK_SERVER_BASE_URL + "/api";
-
+axios.defaults.withCredentials = true;
 const api = axios.create({
   baseURL: CYBERBOOK_API_URL,
   validateStatus: () => true,
@@ -76,4 +76,19 @@ export const getAllBooks = async () => {
     console.error("Error fetching books", error);
   }
   return [];
+};
+
+export const verifyAuth = async () => {
+  try {
+    let response = await api.get("/auth/verify", {
+      withCredentials: true,
+    });
+    if (response.data.status === "success") {
+      let user: User = response.data.data;
+      return user;
+    }
+  } catch (error) {
+    console.error("Error verifying token", error);
+  }
+  return null;
 };

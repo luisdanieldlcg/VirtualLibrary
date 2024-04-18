@@ -52,6 +52,7 @@ namespace server
             var token = ctx.Request.Cookies["authToken"];
             if (token == null)
             {
+                Console.WriteLine("[Debug]: No authToken found");
                 return null;
             }
             var handler = new JwtSecurityTokenHandler();
@@ -68,6 +69,7 @@ namespace server
             }
             catch (Exception)
             {
+                Console.WriteLine("[Debug]: Token payload is invalid");
                 return null;
             }
         }

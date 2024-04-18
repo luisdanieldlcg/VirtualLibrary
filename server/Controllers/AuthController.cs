@@ -76,10 +76,20 @@ namespace server.Controllers
         [HttpGet("verify")]
         public async Task<ActionResult> Verify()
         {
+            _logger.LogInformation("Verifying user token...");
             var payload = JwtHelper.VerifyCookie(HttpContext, _config.GetSection("Jwt:Secret").Value!);
-            if (payload == null) return JSend.Error("No autorizado");
+            if (payload == null)
+            {
+                _logger.LogInformation("The user is not authenticated (reason=payload)");
+                return JSend.Error("No autorizado");
+            };
             var user = await _db.Users.FindAsync(payload.Id);
-            if (user == null) return JSend.Error("No autorizado");
+            if (user == null)
+            {
+                _logger.LogInformation("The user is not authenticated (reason=user not found)");
+                return JSend.Error("No autorizado");
+            }
+            _logger.LogInformation("The user is authenticated");
             return JSend.Success(user);
         }
     }

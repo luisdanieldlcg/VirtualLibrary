@@ -15,6 +15,7 @@ import BookPage from "./pages/BookPage";
 import { BooksProvider } from "./hooks/useBooks";
 import ProfilePage from "./pages/ProfilePage";
 import { useEffect } from "react";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   return (
@@ -34,8 +35,15 @@ const router = createBrowserRouter(
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      <Route element={<HomeLayout />}>
-        <Route path="/home" element={<HomePage />} />
+      <Route
+        element={
+          // <RequireAuth child={
+          //  <HomeLayout />
+          // }/>
+          <HomeLayout />
+        }
+      >
+        <Route path="/home" element={<RequireAuth child={<HomePage />} />} />
         <Route path="/home/book/:id" element={<BookPage />} />
         <Route path="/home/profile" element={<ProfilePage />} />
       </Route>
