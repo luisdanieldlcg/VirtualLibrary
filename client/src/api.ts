@@ -20,9 +20,10 @@ interface SignupDTO {
 export interface User {
   idUser: string;
   fullName: string;
-  username: string;
+  userName: string;
   email: string;
   avatarUrl: string;
+  signupDate: string;
 }
 
 export interface Book {
@@ -38,15 +39,15 @@ export interface Book {
 }
 
 export const login = async (
-
   emailOrUsername: string,
-  password: string, 
+  password: string,
   onSuccess: (user: User) => void,
   onFail: (error: string) => void
 ) => {
   try {
     let response = await api.post("/auth/login", {
-      emailOrUsername, password
+      emailOrUsername,
+      password,
     });
     if (response.data.status === "success") {
       let user: User = response.data.data;
@@ -56,9 +57,9 @@ export const login = async (
       onFail(error);
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 export const signup = async (
   dto: SignupDTO,

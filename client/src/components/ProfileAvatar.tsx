@@ -2,18 +2,20 @@ import { Avatar, Flex, Text } from "@chakra-ui/react";
 import { User } from "../api";
 
 interface Props {
-  user?: User;
+  user: User;
 }
 const ProfileAvatar = ({ user }: Props) => {
   return (
     <Flex align="center" p="2.6rem" borderColor="gray.200">
-      <Avatar size="xl" src="https://bit.ly/dan-abramov" />
+      <Avatar size="xl" src={user.avatarUrl} />
       <Flex flexDirection="column" justifyContent="center" ml={4}>
         <Text fontSize="xl" fontWeight="bold">
-          luisscruz
+          {user.userName}
         </Text>
-        <Text fontSize="md">daniel@gmail.com</Text>
-        <Text fontSize="sm">Miembro desde: 2021-09-01</Text>
+        <Text fontSize="md">{user.email}</Text>
+        <Text fontSize="sm">
+          Miembro desde: {new Date(user.signupDate).toLocaleDateString()}
+        </Text>
       </Flex>
     </Flex>
   );

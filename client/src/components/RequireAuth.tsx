@@ -14,6 +14,7 @@ const RequireAuth = ({ child }: Props) => {
   const { setUser } = useAuth();
   useEffect(() => {
     const verifyToken = async () => {
+      console.log("verifying token");
       const user = await verifyAuth();
       if (user == null) {
         setIsAuthenticated(false);

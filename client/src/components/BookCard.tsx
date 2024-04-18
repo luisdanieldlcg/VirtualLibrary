@@ -54,10 +54,10 @@ const BookCard = ({ book, compact, onClick }: Props) => {
         onClick={onClick}
         cursor={compact ? "pointer" : "default"}
         bg="surface"
-        boxShadow="0 12px 28px 0px hsla(0, 0%, 0%, 0.17)"
+        boxShadow="0 10px 20px 0px hsla(0, 0%, 0%, 0.15)"
         bgGradient="linear(to-b, surface, surfaceDarker)"
         borderRadius="xl"
-        w={compact ? "280px" : "400px"}
+        w={compact ? "240px" : "400px"}
         minH={compact ? "270px" : "590px"}
         maxH={compact ? "350px" : "1000px"}
         mx="8px"
@@ -65,8 +65,8 @@ const BookCard = ({ book, compact, onClick }: Props) => {
         {compact ? (
           <CardHeader textAlign="center">
             <Text>
-              {book.title.length > 45
-                ? book.title.substring(0, 45) + "..."
+              {book.title.length > 40
+                ? book.title.substring(0, 40) + "..."
                 : book.title}
             </Text>
             <Tag

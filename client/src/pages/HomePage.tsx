@@ -12,9 +12,8 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { getAllBooks } from "../api";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useBooks } from "../hooks/useBooks";
@@ -75,7 +74,7 @@ const HomePage = () => {
             left: 0,
             width: "100%",
             height: "100vh",
-            backgroundImage: "url('assets/images/test.jpeg')",
+            backgroundImage: "url('assets/images/library.jpeg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

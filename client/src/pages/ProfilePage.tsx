@@ -2,10 +2,7 @@ import {
   Box,
   Button,
   Flex,
-  HStack,
-  Heading,
   Progress,
-  Spacer,
   Tab,
   TabList,
   TabPanel,
@@ -16,20 +13,21 @@ import {
 } from "@chakra-ui/react";
 import ProfileAvatar from "../components/ProfileAvatar";
 import BookCard, { MinimalBookCard } from "../components/BookCard";
-import TitleContainer, { TextContainer } from "../components/TextContainer";
 import { useLocation } from "react-router-dom";
 import { Book } from "../api";
 import { BiPlusCircle } from "react-icons/bi";
+import { useAuth } from "../hooks/useAuth";
 
 const ProfilePage = () => {
   const location = useLocation();
   const { books } = location.state as { books: Book[] };
+  const { user } = useAuth();
   let book = books[0];
   return (
     <VStack align="stretch" spacing={0}>
       <Flex borderBottom="1px solid" borderColor="surfaceDarker">
         <Box bg="surfaceLighter" display="inline-block" px="4rem">
-          <ProfileAvatar />
+          <ProfileAvatar user={user!} />
           <Flex p="6">
             <Button variant="primary" mr="3">
               Editar Perfil
