@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import ProfileAvatar from "../components/ProfileAvatar";
 import BookCard, { MinimalBookCard } from "../components/BookCard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Book, logout } from "../api";
 import { BiPlusCircle } from "react-icons/bi";
 import { useAuth } from "../hooks/useAuth";
@@ -49,13 +49,21 @@ const ProfilePage = () => {
     );
     setLoggingOut(false);
   };
+
+  const navigate = useNavigate();
   return (
     <VStack align="stretch" spacing={0}>
       <Flex borderBottom="1px solid" borderColor="surfaceDarker">
         <Box bg="surfaceLighter" display="inline-block" px="4rem">
           <ProfileAvatar user={user!} />
           <Flex p="6">
-            <Button variant="primary" mr="3">
+            <Button
+              variant="primary"
+              mr="3"
+              onClick={() => {
+                navigate("/home/profile-edit");
+              }}
+            >
               Editar Perfil
             </Button>
             <Button isLoading={loggingOut} variant="primary" onClick={onLogout}>

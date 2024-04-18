@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PiPencil } from "react-icons/pi";
 
 interface Props {
-  initialImage: string;
+  initialImage: string | undefined;
   onFileChanged: (file: File) => void;
 }
 

@@ -16,6 +16,7 @@ import { BooksProvider } from "./hooks/useBooks";
 import ProfilePage from "./pages/ProfilePage";
 import RequireAuth from "./components/RequireAuth";
 import RootLayout from "./layouts/RootLayout";
+import EditProfilePage from "./pages/EditProfilePage";
 
 function App() {
   return (
@@ -38,9 +39,10 @@ const router = createBrowserRouter(
         <Route path="/signup" element={<SignupPage />} />
       </Route>
       <Route element={<RequireAuth child={<HomeLayout />} />}>
-        <Route path="/home" element={<RequireAuth child={<HomePage />} />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/home/book/:id" element={<BookPage />} />
         <Route path="/home/profile" element={<ProfilePage />} />
+        <Route path="/home/profile-edit" element={<EditProfilePage />} />
       </Route>
       <Route path="*" element={<Navigate to="/login" />} />
     </Route>

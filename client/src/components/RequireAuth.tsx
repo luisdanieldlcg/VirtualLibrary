@@ -14,7 +14,6 @@ const RequireAuth = ({ child }: Props) => {
   const { setUser } = useAuth();
   useEffect(() => {
     const verifyToken = async () => {
-      console.log("verifying token");
       const user = await verifyAuth();
       if (user == null) {
         setIsAuthenticated(false);
@@ -36,7 +35,6 @@ const RequireAuth = ({ child }: Props) => {
       </Fragment>
     );
   }
-  console.log(isAuthenticated);
   return isAuthenticated ? child : <Navigate to="/login" />;
 };
 

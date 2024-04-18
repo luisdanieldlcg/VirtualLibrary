@@ -55,7 +55,6 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    console.log(auth.user);
     if (auth.user) {
       toast({
         title: "Bienvenido nuevamente, " + auth.user.fullName + "! 🎉",
