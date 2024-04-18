@@ -35,6 +35,7 @@ const SignupPage = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
   const auth = useAuth();
 
   const handleSubmit = async () => {
@@ -62,7 +63,7 @@ const SignupPage = () => {
           "Tu cuenta ha sido creada exitosamente. Ahora puedes comenzar a usar Cyberbook.",
         status: "success",
       });
-      window.location.href = "/home";
+      navigate("/home");
     }
   });
 

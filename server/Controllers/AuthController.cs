@@ -31,6 +31,8 @@ namespace server.Controllers
             var validPassword = BCrypt.Net.BCrypt.EnhancedVerify(dto.Password, user.Password, BCrypt.Net.HashType.SHA512);
             if (!validPassword) return JSend.Error("El usuario no existe o la contraseña es incorrecta");
 
+            var minutesAlive = int.Parse(_config.GetSection("Jwt:MinutesAlive").Value!);
+            JwtHelper.MakeCookie(HttpContext, _config.GetSection("Jwt:Secret").Value!, minutesAlive, user);
             _logger.LogInformation("User with id {id} has logged in", user.IdUser);
 
             return JSend.Success(user);
