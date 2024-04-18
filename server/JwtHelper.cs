@@ -46,7 +46,6 @@ namespace server
                 Expires = date
             });
         }
-
         public static JwtData? VerifyCookie(HttpContext ctx, string secret)
         {
             var token = ctx.Request.Cookies["authToken"];

@@ -92,5 +92,23 @@ namespace server.Controllers
             _logger.LogInformation("The user is authenticated");
             return JSend.Success(user);
         }
+
+
+        [HttpGet("logout")]
+        public async Task<ActionResult> Logout()
+        {
+            _logger.LogInformation("Logging out user...");
+            if (HttpContext.Request.Cookies.ContainsKey("authToken"))
+            {
+                HttpContext.Response.Cookies.Delete("authToken");
+                _logger.LogInformation("User logged out");
+                return JSend.Success("Sesión cerrada");
+            }
+            else
+            {
+                _logger.LogInformation("No authToken found");
+                return JSend.Error("No autorizado");
+            }
+        }
     }
 }

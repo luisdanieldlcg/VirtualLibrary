@@ -116,3 +116,22 @@ export const verifyAuth = async () => {
   }
   return null;
 };
+
+export const logout = async (
+  onSuccess: () => void,
+  onFail: (error: string) => void
+) => {
+  try {
+    let response = await api.get("/auth/logout", {
+      withCredentials: true,
+    });
+    if (response.data.status === "success") {
+      onSuccess();
+    } else {
+      onFail(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error logging out", error);
+  }
+  return null;
+};

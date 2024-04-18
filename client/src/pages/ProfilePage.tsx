@@ -10,19 +10,45 @@ import {
   Tabs,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import ProfileAvatar from "../components/ProfileAvatar";
 import BookCard, { MinimalBookCard } from "../components/BookCard";
 import { useLocation } from "react-router-dom";
-import { Book } from "../api";
+import { Book, logout } from "../api";
 import { BiPlusCircle } from "react-icons/bi";
 import { useAuth } from "../hooks/useAuth";
+import { useState } from "react";
 
 const ProfilePage = () => {
   const location = useLocation();
   const { books } = location.state as { books: Book[] };
   const { user } = useAuth();
   let book = books[0];
+
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const toast = useToast({
+    isClosable: true,
+    variant: "left-accent",
+  });
+
+  const onLogout = async () => {
+    setLoggingOut(true);
+    await logout(
+      () => {
+        window.location.href = "/";
+      },
+      (error) => {
+        toast({
+          title: "Error al cerrar sesión",
+          description: error,
+          status: "error",
+        });
+      }
+    );
+    setLoggingOut(false);
+  };
   return (
     <VStack align="stretch" spacing={0}>
       <Flex borderBottom="1px solid" borderColor="surfaceDarker">
@@ -32,7 +58,9 @@ const ProfilePage = () => {
             <Button variant="primary" mr="3">
               Editar Perfil
             </Button>
-            <Button variant="primary">Cerrar Sesión</Button>
+            <Button isLoading={loggingOut} variant="primary" onClick={onLogout}>
+              Cerrar Sesión
+            </Button>
           </Flex>
         </Box>
         <Box py="14px" mx="3rem">

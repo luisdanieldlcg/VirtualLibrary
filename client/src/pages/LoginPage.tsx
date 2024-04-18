@@ -5,15 +5,13 @@ import {
   Text,
   Flex,
   Box,
-  Link,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import TitleContainer from "../components/TextContainer";
 import { useEffect, useState } from "react";
 import { login } from "../api";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [input, setInput] = useState({
@@ -30,8 +28,6 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
   const auth = useAuth();
-
-
 
   const onLogin = async () => {
     setLoading(true);
@@ -59,7 +55,7 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    console.log(auth.user)
+    console.log(auth.user);
     if (auth.user) {
       toast({
         title: "Bienvenido nuevamente, " + auth.user.fullName + "! 🎉",
@@ -74,7 +70,8 @@ const LoginPage = () => {
       <TitleContainer text="Iniciar sesión" />
       <Flex></Flex>
       <FormLabel mt={10}>Email o nombre de usuario</FormLabel>
-      <Input type="email"
+      <Input
+        type="email"
         onChange={(event) => {
           setInput({ ...input, emailOrUsername: event.target.value });
         }}
@@ -82,7 +79,8 @@ const LoginPage = () => {
         placeholder="Ingrese su correo o nombre de usuario"
       />
       <FormLabel mt={5}>Contraseña</FormLabel>
-      <Input type="password"
+      <Input
+        type="password"
         onChange={(event) => {
           setInput({ ...input, password: event.target.value });
         }}
@@ -91,7 +89,12 @@ const LoginPage = () => {
       />
       <Flex>
         <Flex mt={5} alignItems="center">
-          <Link href="/signup" display="flex">
+          <Link
+            to="/signup"
+            style={{
+              display: "flex",
+            }}
+          >
             <Text>¿No tienes cuenta?</Text>
             <Text fontWeight="bold" ml="10px">
               Registrate
