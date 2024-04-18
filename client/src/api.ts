@@ -37,6 +37,29 @@ export interface Book {
   coverUrl: string;
 }
 
+export const login = async (
+
+  emailOrUsername: string,
+  password: string, 
+  onSuccess: (user: User) => void,
+  onFail: (error: string) => void
+) => {
+  try {
+    let response = await api.post("/auth/login", {
+      emailOrUsername, password
+    });
+    if (response.data.status === "success") {
+      let user: User = response.data.data;
+      onSuccess(user);
+    } else {
+      let error = response.data.message;
+      onFail(error);
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const signup = async (
   dto: SignupDTO,
   onSuccess: (user: User) => void,
