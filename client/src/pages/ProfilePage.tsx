@@ -121,7 +121,7 @@ const ProfilePage = () => {
               </Text>
             </Box>
             <Button variant="primary" bg="surface" mt="6rem">
-              Siguiente
+              Continuar
             </Button>
           </VStack>
         </Box>
@@ -130,7 +130,7 @@ const ProfilePage = () => {
         <Tabs variant="primary" align="center">
           <TabList mb={5}>
             <Tab> Mis libros</Tab>
-            <Tab> Mis Lista de lectura</Tab>
+            <Tab> Mis Listas de lectura</Tab>
           </TabList>
 
           <TabPanels
@@ -159,7 +159,7 @@ const ProfilePage = () => {
                   display="inline-block"
                   onClick={() => {}}
                 >
-                  <Text> Nombre lista de lectura de prueba </Text>
+                  <Text> Lista de lectura </Text>
                 </Box>
 
                 <Button
