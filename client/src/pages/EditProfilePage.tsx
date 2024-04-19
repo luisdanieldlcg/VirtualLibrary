@@ -21,6 +21,7 @@ const EditProfilePage = () => {
         _hover={{ bg: "transparent" }}
         aria-label="Go back"
         bg="transparent"
+        color="brown"
         icon={<BiLeftArrowCircle size="xl" />}
         onClick={() => {
           window.history.back();
