@@ -36,7 +36,7 @@ const EditProfilePage = () => {
           w="100%"
         >
           <AvatarPicker
-            initialImage={auth.user?.avatarUrl}
+            initialImage={auth.user?.avatarImageUrl}
             onFileChanged={(file) => {
               console.log(file);
             }}

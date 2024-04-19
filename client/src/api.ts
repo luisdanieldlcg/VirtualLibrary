@@ -22,7 +22,7 @@ export interface User {
   fullName: string;
   userName: string;
   email: string;
-  avatarUrl: string;
+  avatarImageUrl: string;
   signupDate: string;
 }
 

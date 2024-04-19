@@ -46,7 +46,6 @@ export const MinimalBookCard = ({ book }: Props) => {
 };
 
 const BookCard = ({ book, compact, onClick }: Props) => {
-  console.log(book);
   return (
     <Tooltip
       label={compact ? book.genres.join(", ") : null}

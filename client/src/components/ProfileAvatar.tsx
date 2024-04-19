@@ -1,5 +1,5 @@
 import { Avatar, Flex, Text } from "@chakra-ui/react";
-import { User } from "../api";
+import { CYBERBOOK_SERVER_BASE_URL, User } from "../api";
 
 interface Props {
   user: User;
@@ -7,7 +7,10 @@ interface Props {
 const ProfileAvatar = ({ user }: Props) => {
   return (
     <Flex align="center" p="2.6rem" borderColor="gray.200">
-      <Avatar size="xl" src={user.avatarUrl} />
+      <Avatar
+        size="xl"
+        src={`${CYBERBOOK_SERVER_BASE_URL}` + "/" + user.avatarImageUrl}
+      />
       <Flex flexDirection="column" justifyContent="center" ml={4}>
         <Text fontSize="xl" fontWeight="bold">
           {user.userName}
