@@ -15,6 +15,7 @@ const BookPage = () => {
         onClick={() => window.history.back()}
         cursor="pointer"
         size="44px"
+        color="brown"
       />
       <Flex>
         <Box ml="64px">
