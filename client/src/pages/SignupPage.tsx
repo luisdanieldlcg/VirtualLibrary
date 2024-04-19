@@ -69,7 +69,7 @@ const SignupPage = () => {
 
   return (
     <>
-      <Center mt={24}>
+      <Center mt={24} pb="16px">
         <SimpleGrid
           columns={{
             base: 1,

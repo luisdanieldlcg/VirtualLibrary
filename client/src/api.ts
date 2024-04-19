@@ -35,7 +35,7 @@ export interface Book {
   linkPDF: string;
   categoryName: string;
   genres: string[];
-  coverUrl: string;
+  linkCover: string;
 }
 
 export const login = async (

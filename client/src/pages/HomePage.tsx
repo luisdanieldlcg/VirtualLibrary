@@ -145,34 +145,30 @@ const HomePage = () => {
               spacingX={7}
               spacingY={20}
             >
-              {
-                // create a skeleton for each book card
-                // that resembles the size of the book card and its decorations
-                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, i) => (
-                  <Box borderRadius="10px" key={i}>
-                    <Skeleton
-                      key={i}
-                      startColor="surface"
-                      endColor="surfaceDarker"
-                      borderRadius="10px"
-                      height="210px"
-                      width="240px"
-                    />
-                    <SkeletonText
-                      mt="4"
-                      startColor="surface"
-                      endColor="surfaceDarker"
-                      noOfLines={2}
-                    />
-                    <SkeletonText
-                      startColor="surface"
-                      endColor="surfaceDarker"
-                      mt="4"
-                      noOfLines={1}
-                    />
-                  </Box>
-                ))
-              }
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, i) => (
+                <Box borderRadius="10px" key={i}>
+                  <Skeleton
+                    key={i}
+                    startColor="surface"
+                    endColor="surfaceDarker"
+                    borderRadius="10px"
+                    height="210px"
+                    width="240px"
+                  />
+                  <SkeletonText
+                    mt="4"
+                    startColor="surface"
+                    endColor="surfaceDarker"
+                    noOfLines={2}
+                  />
+                  <SkeletonText
+                    startColor="surface"
+                    endColor="surfaceDarker"
+                    mt="4"
+                    noOfLines={1}
+                  />
+                </Box>
+              ))}
             </SimpleGrid>
           ) : (
             <motion.div

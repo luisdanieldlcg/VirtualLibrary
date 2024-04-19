@@ -42,6 +42,7 @@ export const MinimalBookCard = () => {
 };
 
 const BookCard = ({ book, compact, onClick }: Props) => {
+  console.log(book);
   return (
     <Tooltip
       label={compact ? book.genres.join(", ") : null}
@@ -83,7 +84,11 @@ const BookCard = ({ book, compact, onClick }: Props) => {
         <CardBody pt={0}>
           <Image
             mt={compact ? 0 : 8}
-            src="https://marketplace.canva.com/EAFaQMYuZbo/1/0/1003w/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg"
+            src={
+              book.linkCover === ""
+                ? "https://via.placeholder.com/150"
+                : book.linkCover
+            }
             objectFit="fill"
             w="100%"
             minH={compact ? "210px" : "590px"}
