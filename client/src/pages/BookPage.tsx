@@ -61,7 +61,7 @@ const BookPage = () => {
         ml="65vh"
       >
         <Button variant="primary" size="lg" mt={3}>
-          Añadir a la biblioteca
+          Añadir a mi biblioteca
         </Button>
       </Box>
     </VStack>
