@@ -52,8 +52,18 @@ const BookPage = () => {
             <strong>Sinopsis: </strong>
             {book.synopsis}
           </TextContainer>
-          <Button variant="primary" size="lg" mt="64px" mb={10}>
-            Añadir a la biblioteca
+          <Button
+            variant="primary"
+            size="lg"
+            mt="64px"
+            mb={10}
+            onClick={() => {
+              // open the book in a new tab blank
+              console.log(book.linkPDF)
+              window.open(book.linkPDF, "_blank");
+            }}
+          >
+            Ver libro
           </Button>
         </VStack>
       </Flex>
