@@ -139,10 +139,10 @@ const ProfilePage = () => {
             borderColor="surfaceDarker"
           >
             <TabPanel>
-              <Flex>
+              <Flex overflowX="auto">
                 {books.map((book) => (
                   <Flex key={book.idBook} p="20px">
-                    <MinimalBookCard />
+                    <MinimalBookCard book={book} />
                   </Flex>
                 ))}
               </Flex>

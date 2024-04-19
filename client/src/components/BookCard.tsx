@@ -15,7 +15,7 @@ interface Props {
   onClick?: () => void;
 }
 
-export const MinimalBookCard = () => {
+export const MinimalBookCard = ({ book }: Props) => {
   return (
     <Card
       bg="surface"
@@ -29,7 +29,11 @@ export const MinimalBookCard = () => {
       <CardBody pt={0} mt={4}>
         <Image
           mt={0}
-          src="https://marketplace.canva.com/EAFaQMYuZbo/1/0/1003w/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg"
+          src={
+            book.linkCover === ""
+              ? "https://via.placeholder.com/150"
+              : book.linkCover
+          }
           objectFit="fill"
           w="100%"
           minH="130px"

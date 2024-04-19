@@ -16,7 +16,7 @@ const BookPage = () => {
         cursor="pointer"
         size="44px"
       />
-      <Flex wrap="wrap">
+      <Flex>
         <Box ml="64px">
           <BookCard book={book} />
         </Box>
@@ -51,19 +51,11 @@ const BookPage = () => {
             <strong>Sinopsis: </strong>
             {book.synopsis}
           </TextContainer>
+          <Button variant="primary" size="lg" mt="64px" mb={10}>
+            Añadir a la biblioteca
+          </Button>
         </VStack>
       </Flex>
-      <Box
-        w="100%"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        ml="65vh"
-      >
-        <Button variant="primary" size="lg" mt={3}>
-          Añadir a mi biblioteca
-        </Button>
-      </Box>
     </VStack>
   );
 };
